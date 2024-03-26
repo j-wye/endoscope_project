@@ -156,16 +156,16 @@
     <link name="caster_wheel">
         <visual>
             <geometry>
-                <sphere radius="${scaled_wheel_radius / 1.5}"/>
+                <sphere radius="${scaled_wheel_radius / 2}"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
             <geometry>
-                <sphere radius="${scaled_wheel_radius / 1.5}"/>
+                <sphere radius="${scaled_wheel_radius / 2}"/>
             </geometry>
         </collision>
-        <xacro:inertial_sphere mass="${scaled_caster_wheel_mass}" radius="${scaled_wheel_radius / 1.5}">
+        <xacro:inertial_sphere mass="${scaled_caster_wheel_mass}" radius="${scaled_wheel_radius / 2}">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_sphere>
     </link>
