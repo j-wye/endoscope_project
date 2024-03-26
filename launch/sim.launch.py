@@ -8,7 +8,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     package_name='endoscope'
 
-    rsp = IncludeLaunchDescription(
+    robot = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory(package_name),'launch','robot_exe.launch.py'
         )]), launch_arguments={'use_sim_time': 'true'}.items()
@@ -28,7 +28,7 @@ def generate_launch_description():
 
     # Launch them all!
     return LaunchDescription([
-        rsp,
+        robot,
         gazebo,
         spawn_entity,
     ])
