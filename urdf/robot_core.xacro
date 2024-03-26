@@ -5,7 +5,10 @@
     <xacro:include filename="inertial_macros.xacro"/>
 
     <!-- CAMERA PARAMETERS -->
-    <xacro:include filename="depth_camera.xacro"/>
+    <!-- <xacro:include filename="depth_camera.xacro"/> -->
+    <xacro:include filename="rgb_camera.xacro"/>
+
+    <!-- <xacro:include filename="gazebo_control.xacro"/> -->
 
     <!-- COLORS -->
     <material name="white">
@@ -32,20 +35,23 @@
     <link name="base_link"/>
 
     <!-- DEFINE PARAMETERS -->
-    <xacro:property name="chassis_radius" value="0.02"/>
-    <xacro:property name="chassis_length" value="0.1"/>
-    <xacro:property name="wheel_radius" value="0.025"/>
-    <xacro:property name="wheel_length" value="0.01"/>
-    <xacro:property name="chassis_mass" value="0.5"/>
-    <xacro:property name="wheel_mass" value="0.1"/>
-    <xacro:property name="caster_wheel_mass" value="0.5"/>
+    <xacro:property name="chassis_radius" value="0.0065"/>
+    <xacro:property name="chassis_length" value="0.02"/>
+    <xacro:property name="wheel_radius" value="0.008"/>
+    <xacro:property name="wheel_length" value="0.001"/>
+    <xacro:property name="chassis_mass" value="0.002"/>
+    <xacro:property name="wheel_mass" value="0.001"/>
+    <xacro:property name="caster_wheel_mass" value="0.01"/>
 
     <!-- Update All Parameters from a Single Parameter -->
-    <xacro:property name="scale" value="20.0"/>
+    <xacro:property name="scale" value="50.0"/>
     <xacro:property name="scaled_chassis_radius" value="${chassis_radius * scale}"/>
     <xacro:property name="scaled_chassis_length" value="${chassis_length * scale}"/>
-    <xacro:property name="scaled_wheel_radius" value="${wheel_radius * scale}"/>
+    <xacro:property name="scaled_wheel_radius" value="${scaled_chassis_radius * 1.1}"/>
     <xacro:property name="scaled_wheel_length" value="${wheel_length * scale}"/>
+    <xacro:property name="scaled_chassis_mass" value="${chassis_mass * scale}"/>
+    <xacro:property name="scaled_wheel_mass" value="${wheel_mass * scale}"/>
+    <xacro:property name="scaled_caster_wheel_mass" value="${caster_wheel_mass * scale}"/>
     <xacro:property name="scaled_camera_length" value="${scaled_chassis_radius / 5}"/>
 
     <!-- CHASSIS LINK -->
@@ -69,7 +75,7 @@
                 <cylinder radius="${scaled_chassis_radius}" length="${scaled_chassis_length}"/>
             </geometry>
         </collision>
-        <xacro:inertial_cylinder mass="${chassis_mass}" radius="${scaled_chassis_radius}" length="${scaled_chassis_length}">
+        <xacro:inertial_cylinder mass="${scaled_chassis_mass}" radius="${scaled_chassis_radius}" length="${scaled_chassis_length}">
             <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
         </xacro:inertial_cylinder>
     </link>
@@ -100,7 +106,7 @@
                 <cylinder radius="${scaled_wheel_radius}" length="${scaled_wheel_length}"/>
             </geometry>
         </collision>
-        <xacro:inertial_cylinder mass="${wheel_mass}" radius="${scaled_wheel_radius}" length="${scaled_wheel_length}">
+        <xacro:inertial_cylinder mass="${scaled_wheel_mass}" radius="${scaled_wheel_radius}" length="${scaled_wheel_length}">
             <origin xyz="0 0 ${scaled_wheel_length / 2}" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
@@ -131,7 +137,7 @@
                 <cylinder radius="${scaled_wheel_radius}" length="${scaled_wheel_length}"/>
             </geometry>
         </collision>
-        <xacro:inertial_cylinder mass="${wheel_mass}" radius="${scaled_wheel_radius}" length="${scaled_wheel_length}">
+        <xacro:inertial_cylinder mass="${scaled_wheel_mass}" radius="${scaled_wheel_radius}" length="${scaled_wheel_length}">
             <origin xyz="0 0 ${scaled_wheel_length / 2}" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
@@ -159,7 +165,7 @@
                 <sphere radius="${scaled_wheel_radius / 1.5}"/>
             </geometry>
         </collision>
-        <xacro:inertial_sphere mass="${caster_wheel_mass}" radius="${scaled_wheel_radius / 1.5}">
+        <xacro:inertial_sphere mass="${scaled_caster_wheel_mass}" radius="${scaled_wheel_radius / 1.5}">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_sphere>
     </link>
