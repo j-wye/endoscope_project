@@ -26,9 +26,33 @@ def generate_launch_description():
         output='screen'
     )
 
+    joint_state_publisher = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        output='screen'
+    )
+
+    joy_node = Node(
+        package='joy_linux',
+        executable='joy_linux_node', 
+        name='joystick',
+        parameters=[{'dev': '/dev/input/js0'}],
+        output='screen'
+    )
+
+    # joy_launch = IncludeLaunchDescription(
+    #     PythonLaunchDescriptionSource([os.path.join(
+    #         get_package_share_directory(package_name), 'launch', 'joy.launch.py'
+    #     )])
+    # )
+
     # Launch them all!
     return LaunchDescription([
         robot,
         gazebo,
         spawn_entity,
+        joint_state_publisher,
+        joy_node,
+        # joy_launch,
     ])

@@ -1,0 +1,35 @@
+# ros2_control:
+#   resource_manager:
+#     joint_between_chassis_controller:
+#       type: joint_state_broadcaster/JointStateBroadcaster
+#   hardware_resources:
+#     joints:
+#       - name: joint_between_chassis
+#         type: revolute
+#         parameters:
+#           min_position: -1.57  # -90 degrees
+#           max_position: 1.57   # 90 degrees
+#           max_velocity: 1.0    # Maximum velocity in rad/s
+hardware_interface:
+	joints:
+		- joint_between_chassis
+
+joint_between_chassis_controller:
+	type: velocity_controllers/JointVelocityController
+	joints:
+    	- joint_between_chassis
+
+# roll_joint_controller:
+#   type: velocity_controllers/JointVelocityController
+#   joints:
+#     - roll_joint
+
+# pitch_joint_controller:
+#   type: velocity_controllers/JointVelocityController
+#   joints:
+#     - pitch_joint
+
+# yaw_joint_controller:
+#   type: velocity_controllers/JointVelocityController
+#   joints:
+#     - yaw_joint
