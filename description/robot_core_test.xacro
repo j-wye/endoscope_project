@@ -1,12 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-    <!-- INERTIAL SETTINGS -->
-    <xacro:include filename="inertial_macros.xacro"/>
-
-    <!-- CAMERA PARAMETERS -->
-    <!-- <xacro:include filename="depth_camera.xacro"/> -->
-    <xacro:include filename="rgb_camera.xacro"/>
+    
 
     <!-- COLORS -->
     <material name="white">
@@ -34,12 +29,12 @@
 
     <!-- DEFINE PARAMETERS -->
     <xacro:property name="chassis_radius" value="0.0065"/>
-    <xacro:property name="chassis_length" value="0.02"/>
+    <xacro:property name="chassis_length" value="0.03"/>
     <xacro:property name="wheel_radius" value="0.008"/>
     <xacro:property name="wheel_length" value="0.001"/>
-    <xacro:property name="chassis_mass" value="0.002"/>
-    <xacro:property name="wheel_mass" value="0.001"/>
-    <xacro:property name="caster_wheel_mass" value="0.001"/>
+    <xacro:property name="chassis_mass" value="0.001"/>
+    <xacro:property name="wheel_mass" value="0.0005"/>
+    <xacro:property name="caster_wheel_mass" value="0.0005"/>
 
     <!-- Update All Parameters from a Single Parameter -->
     <xacro:property name="scale" value="50.0"/>
@@ -70,7 +65,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
             <geometry>
-                <cylinder radius="${scaled_chassis_radius}" length="${scaled_chassis_length * 0.8}"/>
+                <cylinder radius="${scaled_chassis_radius * 0.8}" length="${scaled_chassis_length * 0.8}"/>
             </geometry>
         </collision>
         <xacro:inertial_cylinder mass="${scaled_chassis_mass}" radius="${scaled_chassis_radius}" length="${scaled_chassis_length}">
@@ -180,21 +175,21 @@
         <child link="front_chassis"/>
         <origin xyz="${scaled_chassis_length / 2}  0 0" rpy="0 0 0"/>
         <axis xyz="0 0 1"/>
-        <limit effort="200.0" lower="${-pi/2}" upper="${pi/2}" velocity="1.0"/>
+        <limit effort="200.0" lower="${-pi/4}" upper="${pi/4}" velocity="1.0"/>
     </joint>    
 
     <link name="front_chassis">
         <visual>
             <origin xyz="${scaled_chassis_length / 2} 0 0" rpy="0 ${pi/2} 0"/>
             <geometry>
-                <cylinder radius="${scaled_chassis_radius}" length="${scaled_chassis_length}"/>
+                <cylinder radius="${scaled_chassis_radius / 2}" length="${scaled_chassis_length}"/>
             </geometry>
             <material name="white"/>
         </visual>
         <collision>
             <origin xyz="${scaled_chassis_length / 2} 0 0" rpy="0 ${pi/2} 0"/>
             <geometry>
-                <cylinder radius="${scaled_chassis_radius}" length="${scaled_chassis_length * 0.8}"/>
+                <cylinder radius="${scaled_chassis_radius * 0.8}" length="${scaled_chassis_length * 0.8}"/>
             </geometry>
         </collision>
         <xacro:inertial_cylinder mass="${scaled_chassis_mass}" radius="${scaled_chassis_radius}" length="${scaled_chassis_length}">
@@ -272,7 +267,7 @@
     <joint name="f_caster_wheel_joint" type="fixed">
         <parent link="front_chassis"/>
         <child link="f_caster_wheel"/>
-        <origin xyz="${scaled_chassis_length / 4} 0 -${scaled_wheel_radius / 2}" rpy="0 0 0"/>
+        <origin xyz="${scaled_chassis_length * 0.75} 0 -${scaled_wheel_radius / 2}" rpy="0 0 0"/>
     </joint>
 
     <link name="f_caster_wheel">
@@ -298,19 +293,11 @@
         <mu2 value="0.001"/>
     </gazebo>
 
-    <!-- <gazebo>
-        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-            <ros2_control_plugin>gazebo_ros2_control/GazeboSystem</ros2_control_plugin>
-            <control_period>0.001</control_period>
-            <parameters>$(find endoscope)/config/ros2_control.yaml</parameters>
-        </plugin>
-    </gazebo> -->
-
     <!-- CAMERA -->
     <joint name="camera_joint" type="fixed">
         <parent link="front_chassis"/>
         <child link="camera_link"/>
-        <origin xyz="${scaled_chassis_length / 2} 0 0" rpy="0 0 0"/>
+        <origin xyz="${scaled_chassis_length} 0 0" rpy="0 0 0"/>
     </joint>
     
     <link name="camera_link">

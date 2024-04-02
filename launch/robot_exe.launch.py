@@ -12,7 +12,7 @@ def generate_launch_description():
 
     # Process the URDF file
     pkg_path = os.path.join(get_package_share_directory('endoscope'))
-    xacro_file = os.path.join(pkg_path,'urdf','robot_exe.xacro')
+    xacro_file = os.path.join(pkg_path,'description','robot_exe.xacro')
     robot_description_config = xacro.process_file(xacro_file)
     # joint_state_publisher_config = xacro.process_file(xacro_file)
     
