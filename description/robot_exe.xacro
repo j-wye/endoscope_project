@@ -5,12 +5,10 @@
 
     <xacro:include filename="rgb_camera.xacro"/>
 
-    <xacro:include filename="robot_core_test.xacro"/>
+    <xacro:include filename="robot_core.xacro"/>
 
     <xacro:include filename="keyboard_control.xacro"/>
 
     <xacro:include filename="control.xacro"/>
-
-    <!-- <xacro:include filename="ros2_control.xacro"/> -->
 
 </robot>

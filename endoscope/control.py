@@ -2,37 +2,36 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
 from geometry_msgs.msg import Twist
-from std_msgs.msg import Float64MultiArray
+from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 
 class JoystickControlNode(Node):
     def __init__(self):
         super().__init__('joystick_control_node')
         self.twist = Twist()
         self.joy_sub = self.create_subscription(Joy, 'joy', self.joy_cb, 10)
-        self.cmd_vel_straight = self.create_publisher(Twist, 'cmd_vel_straight', 10)
+        self.cmd_vel_straight = self.create_publisher(Twist, 'cmd_vel', 10)
         # self.roll_pub = self.create_publisher(Float64, '/joint_between_chassis_controller/command', 10)
         # self.pitch_pub = self.create_publisher(Float64, '/joint_between_chassis_controller/command', 10)
-        self.yaw_pub = self.create_publisher(Float64MultiArray, '/velocity_controller/commands', 10)
+        # self.yaw_pub = self.create_publisher(Float64MultiArray, '/velocity_controller/commands', 10)
+        self.joint_traj_pub = self.create_publisher(JointTrajectory, '/joint_trajectory_controller/joint_trajectory', 10)
+        
         
     def joy_cb(self, msg):
         twist_straight = Twist()
         twist_straight.linear.x = msg.axes[5]
-        twist_straight.linear.y = 0.0
-        twist_straight.linear.z = 0.0
-        twist_straight.angular.x = 0.0
-        twist_straight.angular.y = 0.0
-        twist_straight.angular.z = 0.0
         self.cmd_vel_straight.publish(twist_straight)
 
-        orientation_roll = Float64MultiArray()
-        orientation_pitch = Float64MultiArray()
-        orientation_yaw = Float64MultiArray()
-        orientation_roll.data = [float(msg.axes[0])]
-        orientation_pitch.data = [float(msg.axes[1])]
-        orientation_yaw.data = [float(msg.axes[2])]
-        # self.roll_pub.publish(orientation_roll)
-        # self.pitch_pub.publish(orientation_pitch)
-        self.yaw_pub.publish(orientation_yaw)
+        # JointTrajectory
+        joint_traj = JointTrajectory()
+        joint_traj.joint_names = ['front_chassis_roll_joint', 'front_chassis_pitch_joint', 'front_chassis_yaw_joint']
+        point = JointTrajectoryPoint()
+        
+        # Assuming axes[0], axes[1], and axes[2] are used for roll, pitch, and yaw respectively
+        point.positions = [float(msg.axes[0]), float(msg.axes[1]), float(msg.axes[2])]
+        point.time_from_start.sec = 1  # Set the desired time from start (1 second for example)
+
+        joint_traj.points.append(point)
+        self.joint_traj_pub.publish(joint_traj)
 
 def main(args=None):
     rclpy.init(args=args)

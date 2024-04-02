@@ -20,10 +20,6 @@ def generate_launch_description():
             get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
     )
 
-    # gazebo = ExecuteProcess(
-    #         cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so'],
-    #         output='screen')
-
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
         arguments=['-topic', 'robot_description', '-entity', 'colonoscopy'],
         output='screen'
@@ -50,9 +46,14 @@ def generate_launch_description():
     )
 
     load_joint_trajectory_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'velocity_controller'],
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'joint_trajectory_controller'],
         output='screen'
     )
+
+    # load_diff_drive_controller = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'diff_drive_controller'],
+    #     output='screen'
+    # )
 
     return LaunchDescription([
         robot,
@@ -60,7 +61,6 @@ def generate_launch_description():
         spawn_entity,
         joint_state_publisher,
         joy_node,
-        # joy_launch,
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=spawn_entity,

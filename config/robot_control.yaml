@@ -1,14 +1,27 @@
 controller_manager:
   ros__parameters:
-    update_rate: 100
+    update_rate: 100  # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    velocity_controller:
-      type: velocity_controllers/JointGroupVelocityController
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
 
-velocity_controller:
+joint_trajectory_controller:
   ros__parameters:
     joints:
-      - joint_between_chassis
+      - front_chassis_roll_joint
+      - front_chassis_pitch_joint
+      - front_chassis_yaw_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allowed_execution_duration_scaling: 1.2
+    allowed_goal_duration_margin: 0.5
+    goal_time_tolerance: 0.6
+    state_publish_rate: 25.0
+    action_monitor_rate: 10.0
+    stop_trajectory_duration: 0.5
