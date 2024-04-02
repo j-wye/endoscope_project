@@ -9,17 +9,14 @@ class JoystickControlNode(Node):
         super().__init__('joystick_control_node')
         self.twist = Twist()
         self.joy_sub = self.create_subscription(Joy, 'joy', self.joy_cb, 10)
-        self.cmd_vel_straight = self.create_publisher(Twist, 'cmd_vel', 10)
-        # self.roll_pub = self.create_publisher(Float64, '/joint_between_chassis_controller/command', 10)
-        # self.pitch_pub = self.create_publisher(Float64, '/joint_between_chassis_controller/command', 10)
-        # self.yaw_pub = self.create_publisher(Float64MultiArray, '/velocity_controller/commands', 10)
+        self.cmd_vel = self.create_publisher(Twist, 'cmd_vel', 10)
         self.joint_traj_pub = self.create_publisher(JointTrajectory, '/joint_trajectory_controller/joint_trajectory', 10)
         
         
     def joy_cb(self, msg):
         twist_straight = Twist()
         twist_straight.linear.x = msg.axes[5]
-        self.cmd_vel_straight.publish(twist_straight)
+        self.cmd_vel.publish(twist_straight)
 
         # JointTrajectory
         joint_traj = JointTrajectory()
