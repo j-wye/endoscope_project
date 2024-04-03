@@ -1,5 +1,19 @@
 # endoscope_project
 
+### Aliases
+```bash
+# aliases when using gazebo for endoscope
+alias robot_rviz='sb && ros2 launch endoscope robot_rviz.launch.py'
+alias sim='sb && cd ~/ros2_ws/ && cb && cd src/endoscope && cda && ros2 launch endoscope sim.launch.py world:=my_mesh.world'
+alias sim_robot='sb && cd ~/ros2_ws/ && cb && cd src/endoscope && cda && ros2 launch endoscope sim.launch.py'
+alias sim_robot_ros2='sb && cd ~/ros2_ws/ && cb && cd src/endoscope && cda && ros2 launch endoscope sim_ros2.launch.py'
+alias key='sb && ros2 run teleop_twist_keyboard teleop_twist_keyboard'
+alias joy0='sb && ros2 run joy_linux joy_linux_node --ros-args -p dev:="/dev/input/js0"'
+alias joy1='sb && ros2 run joy_linux joy_linux_node --ros-args -p dev:="/dev/input/js1"'
+alias control='sb && cd ~/ros2_ws/src/endoscope/endoscope && cda && python3 control.py'
+alias control2='sb && cd ~/ros2_ws/src/endoscope/endoscope && cda && python3 control_2.py'
+```
+
 ### Progess
 ![screenshot](./rqt_graph.png)
 ![screenshot](./tf_tree.png)
