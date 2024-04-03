@@ -3,9 +3,9 @@
 
     <xacro:include filename="inertial_macros.xacro"/>
 
-    <xacro:include filename="rgb_camera.xacro"/>
+    <xacro:include filename="depth_camera.xacro"/>
 
-    <xacro:include filename="robot_core.xacro"/>
+    <xacro:include filename="robot_core_test.xacro"/>
 
     <xacro:include filename="keyboard_control.xacro"/>
 

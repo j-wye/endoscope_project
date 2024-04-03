@@ -25,7 +25,7 @@
             <state_interface name="effort"/>
         </joint>
 
-        <joint name="front_chassis_roll_joint">
+        <joint name="chassis_roll_joint">
             <command_interface name="position">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -35,7 +35,7 @@
             <state_interface name="effort"/>
         </joint>
 
-        <joint name="front_chassis_pitch_joint">
+        <joint name="chassis_pitch_joint">
             <command_interface name="position">
                 <param name="min">-1</param>
                 <param name="max">1</param>
@@ -45,7 +45,7 @@
             <state_interface name="effort"/>
         </joint>
 
-        <joint name="front_chassis_yaw_joint">
+        <joint name="chassis_yaw_joint">
             <command_interface name="position">
                 <param name="min">-1</param>
                 <param name="max">1</param>

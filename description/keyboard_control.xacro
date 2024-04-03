@@ -9,8 +9,8 @@
             <!-- Wheel Information -->
             <left_joint>lb_wheel_joint</left_joint>
             <right_joint>rb_wheel_joint</right_joint>
-            <wheel_separation>${2 * scaled_chassis_radius + scaled_wheel_length}</wheel_separation>
-            <wheel_diameter>${2 * scaled_wheel_radius}</wheel_diameter>
+            <wheel_separation>${2 * scaled_back_chassis_radius + scaled_back_wheel_length}</wheel_separation>
+            <wheel_diameter>${2 * scaled_back_wheel_radius}</wheel_diameter>
 
             <!-- Limits -->
             <max_wheel_torque>200</max_wheel_torque>
