@@ -14,6 +14,11 @@ alias control='sb && cd ~/ros2_ws/src/endoscope/endoscope && cda && python3 cont
 alias control2='sb && cd ~/ros2_ws/src/endoscope/endoscope && cda && python3 control_2.py'
 ```
 
+### Logs
+- origin xyz, rpy에서 xyz가 먼저 적용되고 rpy가 적용!
+
+
+
 ### Progess
 ![screenshot](./rqt_graph.png)
 ![screenshot](./tf_tree.png)
