@@ -50,11 +50,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    # load_diff_drive_controller = ExecuteProcess(
-    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'diff_drive_controller'],
-    #     output='screen'
-    # )
-
     return LaunchDescription([
         robot,
         gazebo,

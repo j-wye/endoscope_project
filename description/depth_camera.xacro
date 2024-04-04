@@ -22,14 +22,6 @@
                 <frame_name>camera_optical_link</frame_name>
                 <min_depth>0.02</min_depth>
                 <max_depth>100.0</max_depth>
-                <baseline>0.2</baseline>
-                <alwaysOn>true</alwaysOn>
-                <updateRate>1.0</updateRate>
-                <CxPrime>0</CxPrime>
-                <Cx>0</Cx>
-                <Cy>0</Cy>
-                <focalLength>0</focalLength>
-                <hackBaseline>0</hackBaseline>
             </plugin>
         </sensor>
     </gazebo>
