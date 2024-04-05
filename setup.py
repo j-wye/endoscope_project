@@ -19,7 +19,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='jwye',
+    maintainer='j-wye',
     maintainer_email='4mimprove@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
