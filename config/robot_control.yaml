@@ -11,9 +11,9 @@ controller_manager:
 joint_trajectory_controller:
   ros__parameters:
     joints:
-      - front_chassis_roll_joint
-      - front_chassis_pitch_joint
-      - front_chassis_yaw_joint
+      - chassis_roll_joint
+      - chassis_pitch_joint
+      - chassis_yaw_joint
     command_interfaces:
       - position
     state_interfaces:

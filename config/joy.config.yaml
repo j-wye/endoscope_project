@@ -21,5 +21,5 @@ teleop_twist_joy_node:
       pitch: 1.0
       yaw: 2.0
 
-    enable_button: 0
-    enable_turbo_button: 1
+    enable_button: 1
+    enable_turbo_button: 0
